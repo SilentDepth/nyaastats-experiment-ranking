@@ -86,13 +86,14 @@ watch(form, () => {
     <div class="p-5" style="width: 400px;">
       <h2 class="mb-3 text-stone-800 dark:text-stone-200 text-xl">&ZeroWidthSpace;{{ title || defaultTitle }}<br>&ZeroWidthSpace;<code class="text-stone-600 dark:text-stone-400 text-xs">{{ queryCode }}</code></h2>
       <ol class="mc-box bg-white dark:bg-neutral-800 overflow-hidden divide-y-2 divide-black/20 dark:divide-black/40">
-        <li v-for="(it, idx) of ranking || PLACEHOLDER_RANKING" class="h-10 px-3 flex items-center">
+        <li v-if="!ranking || ranking.length" v-for="(it, idx) of ranking || PLACEHOLDER_RANKING" class="h-10 px-3 flex items-center">
           <template v-if="it">
             <span class="flex-none w-7 text-stone-400 dark:text-neutral-500 text-sm">{{ idx + 1 }}</span>
             <span class="mr-3">{{ it.name }}</span>
             <span class="ml-auto text-stone-600 dark:text-neutral-400 tabular-nums">{{ String(it.value).replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') }}</span>
           </template>
         </li>
+        <li v-else class="h-10 px-3 flex justify-center items-center">NO DATA</li>
       </ol>
     </div>
   </div>
