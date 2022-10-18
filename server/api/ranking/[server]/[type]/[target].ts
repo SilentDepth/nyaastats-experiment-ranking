@@ -1,5 +1,10 @@
 import useDatabase from "~/server/database"
 
+function fixOverflow (num: number): number {
+  const INT_32_MAX = Math.pow(2, 31)
+  return num >= 0 ? num : num + INT_32_MAX * 2
+}
+
 export default defineEventHandler(async event => {
   const { server, type, target } = event.context.params
 
@@ -21,9 +26,9 @@ export default defineEventHandler(async event => {
           const re = new RegExp(target)
           value = Object.entries<number>(it.stats[`minecraft:${type}`])
             .filter(([key]) => re.test(key.slice('minecraft:'.length)))
-            .reduce((total, [, num]) => total + num, 0)
+            .reduce((total, [, num]) => total + fixOverflow(num), 0)
         } else {
-          value = it.stats[`minecraft:${type}`][`minecraft:${target}`] || 0
+          value = fixOverflow(it.stats[`minecraft:${type}`][`minecraft:${target}`] || 0)
         }
       }
 
