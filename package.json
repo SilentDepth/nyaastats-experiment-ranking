@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@types/lokijs": "^1.5.7",
+    "@unocss/nuxt": "^0.45.29",
+    "@unocss/reset": "^0.45.29",
+    "chokidar": "^3.5.3",
+    "lokijs": "^1.5.12",
+    "nuxt": "3.0.0-rc.11",
+    "prismarine-nbt": "^2.2.1",
+    "sass": "^1.55.0"
+  }
+}
