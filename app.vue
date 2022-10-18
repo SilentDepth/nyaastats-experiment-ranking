@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+useDark()
+
 const host = useRequestHeaders(['host']).host ?? location.host
 
 const form = reactive({
@@ -54,9 +56,9 @@ watch(form, () => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-stone-200 grid place-content-center md:grid-flow-col">
+  <div class="min-h-screen bg-stone-200 dark:bg-black dark:text-stone-200 grid place-content-center md:grid-flow-col">
     <form class="w-full md:w-[300px] p-5 flex flex-col space-y-3" @submit.prevent="query">
-      <h1 class="text-xl font-bold">玩家数据榜单</h1>
+      <h1 class="dark:text-white text-xl font-bold">玩家数据榜单</h1>
       <label class="flex flex-col">
         <span class="mb-1">玩家服务器</span>
         <select v-model="form.server" class="mc-input px-1 py-2 outline-none">
@@ -82,13 +84,13 @@ watch(form, () => {
     </form>
 
     <div class="p-5" style="width: 400px;">
-      <h2 class="mb-3 text-gray-800 text-xl">&ZeroWidthSpace;{{ title || defaultTitle }}<br>&ZeroWidthSpace;<code class="text-gray-600 text-xs">{{ queryCode }}</code></h2>
-      <ol class="mc-box bg-white overflow-hidden divide-y-2 divide-black/20">
+      <h2 class="mb-3 text-stone-800 dark:text-stone-200 text-xl">&ZeroWidthSpace;{{ title || defaultTitle }}<br>&ZeroWidthSpace;<code class="text-stone-600 dark:text-stone-400 text-xs">{{ queryCode }}</code></h2>
+      <ol class="mc-box bg-white dark:bg-neutral-800 overflow-hidden divide-y-2 divide-black/20 dark:divide-black/40">
         <li v-for="(it, idx) of ranking || PLACEHOLDER_RANKING" class="h-10 px-3 flex items-center">
           <template v-if="it">
-            <span class="flex-none w-7 text-stone-400 text-sm">{{ idx + 1 }}</span>
+            <span class="flex-none w-7 text-stone-400 dark:text-neutral-500 text-sm">{{ idx + 1 }}</span>
             <span class="mr-3">{{ it.name }}</span>
-            <span class="ml-auto text-stone-600 tabular-nums">{{ String(it.value).replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') }}</span>
+            <span class="ml-auto text-stone-600 dark:text-neutral-400 tabular-nums">{{ String(it.value).replace(/(\d)(?=(?:\d{3})+$)/g, '$1,') }}</span>
           </template>
         </li>
       </ol>

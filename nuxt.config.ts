@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     ['@unocss/nuxt', {
       uno: true,
     }],
+    '@vueuse/nuxt',
   ],
   css: [
     '@unocss/reset/tailwind.css',
