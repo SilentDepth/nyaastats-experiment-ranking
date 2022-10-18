@@ -29,6 +29,7 @@ export default defineEventHandler(async event => {
 
       return { uuid: it.uuid, name, value }
     })
+    .where(it => it.value > 0)
     .sort((a, b) => b.value - a.value)
     .limit(20)
     .data()
