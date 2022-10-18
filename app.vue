@@ -78,7 +78,7 @@ watch(form, () => {
         <span class="mb-1">榜单标题</span>
         <input v-model="title" type="text" :placeholder="defaultTitle" class="mc-input px-2 py-1.5 outline-none">
       </label>
-      <button type="submit" :disabled="ranking == null" class="mc-button mc-button-primary p-2 !mt-10">{{ ranking == null ? 'LOADING' : '查询' }}</button>
+      <Button type="submit" :disabled="ranking == null" class="primary !mt-10">{{ ranking == null ? 'LOADING' : '查询' }}</Button>
     </form>
 
     <div class="p-5" style="width: 400px;">
