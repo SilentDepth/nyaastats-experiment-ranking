@@ -49,10 +49,12 @@ function initDatabase (name: string, dir: string): { db: Loki, ready: Promise<vo
       const file = path.join(dir, 'playerdata', f)
       await addPlayer(file)
     }
-    chokidar.watch(path.join(dir, 'playerdata'), { ignoreInitial: true })
-      .on('add', file => addPlayer(file))
-      .on('change', file => updatePlayer(file))
-      .on('unlink', file => removePlayer(file))
+    if (process.env.NODE_ENV !== 'development') {
+      chokidar.watch(path.join(dir, 'playerdata'), { ignoreInitial: true })
+        .on('add', file => addPlayer(file))
+        .on('change', file => updatePlayer(file))
+        .on('unlink', file => removePlayer(file))
+    }
 
     // stats
 
@@ -80,10 +82,12 @@ function initDatabase (name: string, dir: string): { db: Loki, ready: Promise<vo
       const file = path.join(dir, 'stats', f)
       addStats(file)
     }
-    chokidar.watch(path.join(dir, 'stats'), { ignoreInitial: true })
-      .on('add', file => addStats(file))
-      .on('change', file => updateStats(file))
-      .on('unlink', file => removeStats(file))
+    if (process.env.NODE_ENV !== 'development') {
+      chokidar.watch(path.join(dir, 'stats'), { ignoreInitial: true })
+        .on('add', file => addStats(file))
+        .on('change', file => updateStats(file))
+        .on('unlink', file => removeStats(file))
+    }
 
     console.log(`[${name}] Initialized in ${(Date.now() - _start) / 1000}s`)
     done()
