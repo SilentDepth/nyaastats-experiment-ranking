@@ -49,7 +49,7 @@ function initDatabase (name: string, dir: string): { db: Loki, ready: Promise<vo
       const file = path.join(dir, 'playerdata', f)
       await addPlayer(file)
     }
-    if (process.env.NODE_ENV !== 'development') {
+    if (!process.env.NYAASTATS_NO_WATCH) {
       chokidar.watch(path.join(dir, 'playerdata'), { ignoreInitial: true })
         .on('add', file => addPlayer(file))
         .on('change', file => updatePlayer(file))
@@ -82,7 +82,7 @@ function initDatabase (name: string, dir: string): { db: Loki, ready: Promise<vo
       const file = path.join(dir, 'stats', f)
       addStats(file)
     }
-    if (process.env.NODE_ENV !== 'development') {
+    if (!process.env.NYAASTATS_NO_WATCH) {
       chokidar.watch(path.join(dir, 'stats'), { ignoreInitial: true })
         .on('add', file => addStats(file))
         .on('change', file => updateStats(file))
