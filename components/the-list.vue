@@ -24,7 +24,7 @@ function formatNumber (num: number): string {
 <template lang="pug">
 div(class="p-5")
   h2(class="mb-3 text-stone-800 dark:text-stone-200 text-xl keep-lineheight") {{ title }}
-  p(class="mb-3 text-stone-600 dark:text-stone-400 text-xs font-mono keep-lineheight") {{ description }}
+  p(class="mb-3 text-stone-600 dark:text-stone-400 text-xs font-mono keep-lineheight") {{ description.replaceAll('/', '/​') }}
   ol.mc-box(class="bg-white dark:bg-neutral-800 overflow-hidden divide-y-2 divide-black/20 dark:divide-black/40")
     li(v-for="(it, idx) of data || 20" class="h-10 px-3 flex items-center")
       template( v-if="data")
