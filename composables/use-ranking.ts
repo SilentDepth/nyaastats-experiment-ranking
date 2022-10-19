@@ -1,4 +1,4 @@
-interface RankingParams {
+export interface RankingParams {
   server: 'kedama' | 'nyaa'
   type: string
   target: string
