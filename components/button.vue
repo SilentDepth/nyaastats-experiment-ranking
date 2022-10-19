@@ -15,7 +15,7 @@ button {
   }
 
   &:disabled {
-    background: #6b6562;
+    background: #6b6562 !important;
     box-shadow: none;
     text-shadow: none;
   }

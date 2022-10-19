@@ -1,0 +1,4 @@
+.keep-lineheight::before {
+  content: '\200b';
+  user-select: none;
+}
