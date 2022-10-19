@@ -6,17 +6,20 @@ export default defineNuxtConfig({
     }],
     '@vueuse/nuxt',
   ],
-  meta: {
-    link: [
-      { rel: 'shortcut icon', type: 'image/png', href: './favicon.png' },
-    ],
-  },
   css: [
     '@unocss/reset/tailwind.css',
     '~/assets/css/minecraft.scss',
     '~/assets/css/global.css',
   ],
   ssr: false,
+  app: {
+    head: {
+      title: 'NyaaStats Ranking Service',
+      link: [
+        { rel: 'shortcut icon', type: 'image/png', href: './favicon.png' },
+      ],
+    },
+  },
   experimental: {
     reactivityTransform: true,
     writeEarlyHints: false,
