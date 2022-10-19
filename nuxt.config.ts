@@ -10,4 +10,7 @@ export default defineNuxtConfig({
     '@unocss/reset/tailwind.css',
     '~/assets/css/minecraft.scss',
   ],
+  experimental: {
+    reactivityTransform: true,
+  },
 })
