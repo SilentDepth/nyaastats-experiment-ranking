@@ -19,5 +19,6 @@ export default defineNuxtConfig({
   ssr: false,
   experimental: {
     reactivityTransform: true,
+    writeEarlyHints: false,
   },
 })
