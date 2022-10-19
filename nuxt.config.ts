@@ -6,6 +6,11 @@ export default defineNuxtConfig({
     }],
     '@vueuse/nuxt',
   ],
+  meta: {
+    link: [
+      { rel: 'shortcut icon', type: 'image/png', href: './favicon.png' },
+    ],
+  },
   css: [
     '@unocss/reset/tailwind.css',
     '~/assets/css/minecraft.scss',
