@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '~/assets/css/minecraft.scss',
     '~/assets/css/global.css',
   ],
+  ssr: false,
   experimental: {
     reactivityTransform: true,
   },
