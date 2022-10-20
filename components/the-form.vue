@@ -65,7 +65,7 @@ form(class="md:w-[300px] p-5 flex flex-col space-y-10" @submit.prevent="query()"
   label(class="relative flex flex-col")
     span(class="absolute bottom-full mb-1") 榜单标题
     input(v-model="title" type="text" :placeholder="defaultTitle" class="mc-input px-2 py-1.5 outline-none")
-  Button.primary(type="submit" :disabled="querying") {{ querying ? 'LOADING' : '查询' }}
+  Button.primary(type="submit" :disabled="querying || !params.target") {{ querying ? 'LOADING' : '查询' }}
 
   section
     h2(class="mb-2 text-sm text-stone-600 dark:text-neutral-400 font-bold") 一些有趣的榜单
