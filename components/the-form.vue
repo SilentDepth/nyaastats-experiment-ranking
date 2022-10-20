@@ -48,8 +48,7 @@ function applyAdvice (advice: Advice) {
 </script>
 
 <template lang="pug">
-// guess `w-full` is redundant
-form(class="w-full md:w-[300px] p-5 flex flex-col space-y-10" @submit.prevent="query()")
+form(class="md:w-[300px] p-5 flex flex-col space-y-10" @submit.prevent="query()")
   h1(class="dark:text-white text-xl font-bold") 玩家数据榜单
   label(class="relative flex flex-col")
     span(class="absolute bottom-full mb-1") 玩家服务器
