@@ -31,7 +31,7 @@ async function query (paramsInit?: Partial<RankingParams>) {
 
   querying = true
   ranking = null
-  ranking = await $fetch(`/api/ranking/${params.server}/${params.type}/${params.target}`)
+  ranking = await $fetch(`/api/query/${params.server}`, { method: 'POST', body: params.target })
   querying = false
 }
 

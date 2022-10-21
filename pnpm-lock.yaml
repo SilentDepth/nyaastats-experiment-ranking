@@ -8,6 +8,7 @@ specifiers:
   '@volar/vue-language-plugin-pug': ^1.0.8
   '@vueuse/core': ^9.3.1
   '@vueuse/nuxt': ^9.3.1
+  acorn: ^8.8.0
   chokidar: ^3.5.3
   lokijs: ^1.5.12
   nuxt: 3.0.0-rc.12
@@ -23,6 +24,7 @@ devDependencies:
   '@volar/vue-language-plugin-pug': 1.0.8
   '@vueuse/core': 9.3.1
   '@vueuse/nuxt': 9.3.1_nuxt@3.0.0-rc.12
+  acorn: 8.8.0
   chokidar: 3.5.3
   lokijs: 1.5.12
   nuxt: 3.0.0-rc.12_sass@1.55.0
