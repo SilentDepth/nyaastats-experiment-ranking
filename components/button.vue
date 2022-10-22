@@ -1,5 +1,5 @@
 <template>
-  <button class="h-[2.5em]">
+  <button class="h-[2.5em] px-2.5 whitespace-nowrap">
     <slot/>
   </button>
 </template>

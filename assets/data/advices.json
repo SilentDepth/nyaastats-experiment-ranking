@@ -1,0 +1,29 @@
+[
+  {
+    "title": "边界即为极限",
+    "query": "custom.aviate_one_cm"
+  },
+  {
+    "title": "游牧民族",
+    "query": "custom.horse_one_cm"
+  },
+  {
+    "title": "捕鱼达人",
+    "query": "custom.fish_caught"
+  },
+  {
+    "title": "好死不如赖活着",
+    "query": "custom.time_since_death",
+    "contributor": "Akyuu"
+  },
+  {
+    "title": "真的勇者敢于生吞河豚",
+    "query": "used.pufferfish",
+    "contributor": "Aqua_Ruri"
+  },
+  {
+    "title": "吃多了会发光哦",
+    "query": "used.glow_berries",
+    "contributor": "Rimo"
+  }
+]

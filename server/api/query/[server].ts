@@ -1,6 +1,11 @@
 import useQuery from '~/server/utils/use-query'
 import useDatabase from '~/server/database'
 
+function fixOverflow (num: number): number {
+  const INT_32_MAX = Math.pow(2, 31)
+  return num >= 0 ? num : num + INT_32_MAX * 2
+}
+
 function prefixer (obj: object, prefix: string) {
   return new Proxy(obj, {
     get (obj, prop) {
@@ -34,7 +39,7 @@ export default defineEventHandler(async event => {
 
       let value: number = 0
       if (name) {
-        value = evaluate(prefixer(it.stats, 'minecraft:'))
+        value = fixOverflow(evaluate(prefixer(it.stats, 'minecraft:')))
       }
 
       return { uuid: it.uuid, name, value }

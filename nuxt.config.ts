@@ -1,8 +1,12 @@
-// https://v3.nuxtjs.org/api/configuration/nuxt.config
+import transformerDirective from '@unocss/transformer-directives'
+
 export default defineNuxtConfig({
   modules: [
     ['@unocss/nuxt', {
       uno: true,
+      transformers: [
+        transformerDirective(),
+      ],
     }],
     '@vueuse/nuxt',
   ],
