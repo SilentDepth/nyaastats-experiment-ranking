@@ -9,7 +9,7 @@ defineProps({
 })
 
 function formatNumber (num: number): string {
-  return String(num).replaceAll(/(\d)(?=(?:\d{3})+$)/g, '$1,')
+  return String(Math.round(num * 100) / 100).replaceAll(/(\d)(?=(?:\d{3})+(\.|$))/g, '$1,')
 }
 </script>
 
