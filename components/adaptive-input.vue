@@ -4,6 +4,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  placeholder: {
+    type: String,
+    default: null,
+  },
 })
 const emit = defineEmits(['update:modelValue', 'update:ref'])
 const modelValue = useVModel(props, 'modelValue', emit)
@@ -19,6 +23,7 @@ div
     textarea(
       ref="textarea"
       v-model="modelValue"
+      :placeholder="placeholder"
       class="absolute inset-0 w-full h-full bg-transparent outline-none overflow-hidden resize-none"
     )
 </template>

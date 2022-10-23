@@ -4,6 +4,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  placeholder: {
+    type: String,
+    default: null,
+  },
 })
 const emit = defineEmits(['update:modelValue', 'submit'])
 const modelValue = useVModel(props, 'modelValue', emit)
@@ -21,6 +25,7 @@ whenever(() => activeElement as any === input && (cmd_enter || ctrl_enter), () =
 <template lang="pug">
 AdaptiveInput(
   v-model="modelValue"
+  :placeholder="placeholder"
   class="mc-input bg-white text-sm font-mono"
   @update:ref="el => input = el"
 )

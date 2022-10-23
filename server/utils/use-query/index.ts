@@ -1,6 +1,6 @@
-import { parse, evaluate } from './parser'
+import Parser from './parser'
 
 export default function useQuery (query: string) {
-  const ast = parse(query)
-  return (context: any) => evaluate(ast, context)
+  const parser = new Parser(query)
+  return (context: any) => parser.evaluate(context)
 }

@@ -6,12 +6,17 @@ function fixOverflow (num: number): number {
   return num >= 0 ? num : num + INT_32_MAX * 2
 }
 
-function prefixer (obj: object, prefix: string) {
+function agent (obj: object, prefix: string) {
   return new Proxy(obj, {
     get (obj, prop) {
-      if (typeof prop === 'string') {
+      if (prop === '$') {
+        return (pattern: string) => {
+          const re = new RegExp(`^${pattern.replaceAll('*', '.*')}$`)
+          return Object.entries(obj).filter(([key]) => re.test(key)).reduce((total, [, value]) => total + value, 0)
+        }
+      } else if (typeof prop === 'string') {
         const value = obj[prefix + prop]
-        return typeof value === 'object' ? prefixer(value, prefix) : fixOverflow(value)
+        return typeof value === 'object' ? agent(value, prefix) : fixOverflow(value)
       } else {
         return obj[prop]
       }
@@ -39,7 +44,7 @@ export default defineEventHandler(async event => {
 
       let value: number = 0
       if (name) {
-        value = evaluate(prefixer(it.stats, 'minecraft:'))
+        value = evaluate(agent(it.stats, 'minecraft:'))
       }
 
       return { uuid: it.uuid, name, value }

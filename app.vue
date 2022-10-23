@@ -28,10 +28,24 @@ div(class="min-h-screen bg-stone-200 dark:bg-black dark:text-stone-200 flex flex
           svg(viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="ml-auto w-6 h-6 md:hidden")
             path(d="M8.25 9L12 5.25 15.75 9")
             path(d="M8.25 15L12 18.75 15.75 15")
-        ol.custom-counter(class="list-inside dark:text-neutral-300 text-sm space-y-3")
+        ol.custom-counter(class="list-inside dark:text-neutral-300 text-sm space-y-2")
           li 点击标题可编辑
-          li 查询表达式支持简单的四则运算
-          li 暂不支持匹配语法（旧版查询器的 <code>$</code>）
+          li 查询表达式支持以下用法
+            ul(class="pl-5 pt-2 space-y-2")
+              li
+                code(class="text-xs") crafted.glass
+                br
+                | 单指标查询
+              li
+                code(class="text-xs") crafted.glass - used.glass
+                br
+                | 四则运算
+              li
+                code(class="text-xs") crafted.$('*_glass')
+                br
+                | 指标匹配
+          li 指标名即游戏统计项的简略写法，即
+            p(class="pl-5") <code>minecraft:used/minecraft:glass</code><br>↓<br><code>used.glass</code>
           li 试一试这些有趣的榜单
             ul(class="pl-5 pt-2 space-y-2")
               li(v-if="loadingAdvices")
@@ -47,7 +61,7 @@ div(class="min-h-screen bg-stone-200 dark:bg-black dark:text-stone-200 flex flex
           | &ZeroWidthSpace;
           span(class="text-sm") ← 单击编辑标题
       div(class="relative")
-        QueryEditor(v-model="query" @submit="submit()")
+        QueryEditor(v-model="query" placeholder="查询表达式" @submit="submit()")
       div(class="text-sm text-stone-600 dark:text-neutral-500 flex items-center")
         label(class="flex items-center")
           span 服务器：
