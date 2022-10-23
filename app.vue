@@ -38,7 +38,7 @@ div(class="min-h-screen bg-stone-200 dark:bg-black dark:text-stone-200 flex flex
                 span(class="ml-0.5 inline-block w-[0.8em] h-[0.8em] bg-current animate-spin")
               li(v-for="it of advices")
                 a(href="javascript:" class="text-[#337121] dark:text-[#4ba032] hover:underline hover:underline-offset-3" @click="applyAdvice(it)") {{ it.title }}
-                span(v-if="it.contributor" class="text-stone-500 dark:text-neutral-400 text-sm") &nbsp;by {{ it.contributor }}
+                span(v-if="it.contributor" class="text-stone-500 dark:text-neutral-400 text-xs") &nbsp;by {{ it.contributor }}
       div(class="flex")
     section(class="md:flex-none box-content md:w-[400px] p-3 -m-3 space-y-3")
       div(class="relative")
@@ -68,6 +68,12 @@ div(class="min-h-screen bg-stone-200 dark:bg-black dark:text-stone-200 flex flex
 </template>
 
 <style lang="scss" scoped>
+@import url(https://rsms.me/inter/inter.css);
+
+main {
+  font-family: Inter, -apple-system, Noto Sans, Helvetica Neue, Helvetica, Nimbus Sans L, Arial, Liberation Sans, PingFang SC, Hiragino Sans GB, Noto Sans CJK SC, Source Han Sans SC, Source Han Sans CN, Microsoft YaHei, Wenquanyi Micro Hei, WenQuanYi Zen Hei, ST Heiti, SimHei, WenQuanYi Zen Hei Sharp, sans-serif;
+}
+
 ol.custom-counter {
   counter-reset: usageCounter;
 

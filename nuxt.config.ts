@@ -13,7 +13,6 @@ export default defineNuxtConfig({
   css: [
     '@unocss/reset/tailwind.css',
     '~/assets/css/minecraft.scss',
-    '~/assets/css/global.css',
   ],
   ssr: false,
   app: {
