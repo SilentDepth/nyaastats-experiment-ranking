@@ -11,7 +11,7 @@ function prefixer (obj: object, prefix: string) {
     get (obj, prop) {
       if (typeof prop === 'string') {
         const value = obj[prefix + prop]
-        return typeof value === 'object' ? prefixer(value, prefix) : value
+        return typeof value === 'object' ? prefixer(value, prefix) : fixOverflow(value)
       } else {
         return obj[prop]
       }
@@ -39,7 +39,7 @@ export default defineEventHandler(async event => {
 
       let value: number = 0
       if (name) {
-        value = fixOverflow(evaluate(prefixer(it.stats, 'minecraft:')))
+        value = evaluate(prefixer(it.stats, 'minecraft:'))
       }
 
       return { uuid: it.uuid, name, value }
