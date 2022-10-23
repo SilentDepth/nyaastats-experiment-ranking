@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import advices from '~/assets/data/advices.json'
-
 useDark()
 const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
@@ -11,6 +9,8 @@ let { server, query } = $(rankingStore)
 const hotkey = navigator.platform.startsWith('Mac') ? '⌘⏎' : 'Ctrl-Enter'
 
 let title = $ref('玩家数据榜单')
+
+const { data: advices, pending: loadingAdvices } = useAdvices()
 
 function applyAdvice (advice: Advice) {
   title = advice.title
@@ -34,6 +34,8 @@ div(class="min-h-screen bg-stone-200 dark:bg-black dark:text-stone-200 grid plac
           li 暂不支持匹配语法（旧版查询器的 <code>$</code>）
           li 试一试这些有趣的榜单
             ul(class="pl-5 pt-2 space-y-2")
+              li(v-if="loadingAdvices")
+                span(class="ml-0.5 inline-block w-[0.8em] h-[0.8em] bg-current animate-spin")
               li(v-for="it of advices")
                 a(href="javascript:" class="text-[#337121] dark:text-[#4ba032] hover:underline hover:underline-offset-3" @click="applyAdvice(it)") {{ it.title }}
                 span(v-if="it.contributor" class="text-stone-500 dark:text-neutral-400 text-sm") &nbsp;by {{ it.contributor }}
@@ -53,7 +55,11 @@ div(class="min-h-screen bg-stone-200 dark:bg-black dark:text-stone-200 grid plac
             option(value="kedama" :selected="server === 'kedama'") 毛线
             option(value="nyaa" :selected="server === 'nyaa'") 喵窝
         //- span(class="ml-auto") 数据更新日期：0000-00-00
-        Button.primary(type="button" :disabled="querying || !query" class="ml-auto w-[128px] text-sm" @click="submit()") {{ querying ? 'LOADING' : `查询 (${hotkey})` }}
+        Button.primary(type="button" :disabled="querying || !query" class="ml-auto w-[128px] text-sm grid place-content-center" @click="submit()")
+          template(v-if="querying")
+            span(class="inline-block w-[0.8em] h-[0.8em] bg-current animate-spin")
+          template(v-else)
+            | {{ `查询 (${hotkey})` }}
       TheList(:data="data")
 </template>
 
