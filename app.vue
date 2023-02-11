@@ -9,6 +9,9 @@ const { querying, data, total, submit } = $(rankingStore)
 let { server, query } = $(rankingStore)
 if (urlConfig.query) {
   query = urlConfig.query
+  if (urlConfig.server) {
+    server = urlConfig.server
+  }
   submit()
 }
 
@@ -17,9 +20,10 @@ const hotkey = navigator.platform.startsWith('Mac') ? '⌘⏎' : 'Ctrl-Enter'
 const DEFAULT_TITLE = '玩家数据榜单'
 let title = $ref(urlConfig.title || DEFAULT_TITLE)
 
-watch([$$(query), $$(title)], () => {
+watch([$$(server), $$(query), $$(title)], () => {
   urlConfig = {
     title: title === DEFAULT_TITLE ? undefined : title,
+    server,
     query,
   }
 })
