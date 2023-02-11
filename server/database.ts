@@ -1,6 +1,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import Loki from 'lokijs'
+import destr from 'destr'
 import { parse, simplify } from 'prismarine-nbt'
 import chokidar from 'chokidar'
 
@@ -19,11 +20,25 @@ function initDatabase (name: string, dir: string): { db: Loki, ready: Promise<vo
 
   const db = new Loki(name)
   const ready = new Promise<void>(async done => {
+    // banned players
+
+    function readBannedUuids (): any[] {
+      const data = destr(fs.readFileSync(path.join(dir, 'banned-players.json'), 'utf-8'))
+      if (Array.isArray(data)) {
+        return data.map(it => it.uuid)
+      } else {
+        return []
+      }
+    }
+
+    const banned = new Set(readBannedUuids())
+
     // players
 
     const players = db.addCollection<any>('players', { indices: ['uuid'] })
     const addPlayer = async (file: string) => {
       const uuid = path.basename(file, '.dat')
+      if (banned.has(uuid)) return
       const data = await readNBT(file)
       players.insert({
         uuid,
@@ -34,6 +49,7 @@ function initDatabase (name: string, dir: string): { db: Loki, ready: Promise<vo
     }
     const updatePlayer = async (file: string) => {
       const uuid = path.basename(file, '.dat')
+      if (banned.has(uuid)) return
       const data = await readNBT(file)
       players.findAndUpdate({ uuid }, obj => {
         obj.data = {
@@ -54,6 +70,19 @@ function initDatabase (name: string, dir: string): { db: Loki, ready: Promise<vo
         .on('add', file => addPlayer(file))
         .on('change', file => updatePlayer(file))
         .on('unlink', file => removePlayer(file))
+      chokidar.watch(path.join(dir, 'banned-players.json'), { ignoreInitial: true })
+        .on('change', () => {
+          const newList = readBannedUuids()
+          const oldList = [...banned.values()]
+          for (const uuid of newList.filter(uuid => !oldList.includes(uuid))) {
+            removePlayer(path.join(dir, `playerdata/${uuid}.dat`))
+            banned.add(uuid)
+          }
+          for (const uuid of oldList.filter(uuid => !newList.includes(uuid))) {
+            addPlayer(path.join(dir, `playerdata/${uuid}.dat`))
+            banned.delete(uuid)
+          }
+        })
     }
 
     // stats
@@ -89,7 +118,7 @@ function initDatabase (name: string, dir: string): { db: Loki, ready: Promise<vo
         .on('unlink', file => removeStats(file))
     }
 
-    console.log(`[${name}] Initialized in ${(Date.now() - _start) / 1000}s`)
+    console.log(`[${name}] Initialized in ${(Date.now() - _start) / 1000}s (${players.count()} players)`)
     done()
   })
 
