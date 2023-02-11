@@ -25,6 +25,11 @@ div(class="")
         span(class="relative z-1 flex-none w-7 text-stone-400 dark:text-neutral-500 text-sm") {{ idx + 1 }}
         span(class="relative z-1 mr-3") {{ it.name || it.uuid }}
         span(class="relative z-1 ml-auto text-stone-600 dark:text-neutral-400 tabular-nums") {{ formatNumber(it.value) }}
-        span(class="absolute right-0 inset-y-0 z-0 bg-stone-100 dark:bg-neutral-700/50" :style="{ width: it.value / total * 100 + '%' }")
+        transition(
+          appear
+          enter-from-class="w-0!"
+          enter-active-class="transition-all duration-500 ease-out"
+        )
+          span(class="absolute right-0 inset-y-0 z-0 bg-stone-100 dark:bg-neutral-700/50" :style="{ width: it.value / total * 100 + '%' }")
     li(v-if="data?.length === 0" class="h-10 px-3 text-stone-400 dark:text-neutral-500 flex justify-center items-center") NO DATA
 </template>
