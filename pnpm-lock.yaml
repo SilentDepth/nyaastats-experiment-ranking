@@ -12,6 +12,7 @@ specifiers:
   acorn: ^8.8.2
   chokidar: ^3.5.3
   destr: ^1.2.2
+  js-base64: ^3.7.5
   lokijs: ^1.5.12
   nuxt: ^3.2.0
   prismarine-nbt: ^2.2.1
@@ -30,6 +31,7 @@ devDependencies:
   acorn: 8.8.2
   chokidar: 3.5.3
   destr: 1.2.2
+  js-base64: 3.7.5
   lokijs: 1.5.12
   nuxt: 3.2.0_gyrp4zacqcjjrmgvdzgac5epyy
   prismarine-nbt: 2.2.1
@@ -3372,6 +3374,10 @@ packages:
   /jiti/1.17.0:
     resolution: {integrity: sha512-CByzPgFqYoB9odEeef7GNmQ3S5THIBOtzRYoSCya2Sv27AuQxy2jgoFjQ6VTF53xsq1MXRm+YWNvOoDHUAteOw==}
     hasBin: true
+    dev: true
+
+  /js-base64/3.7.5:
+    resolution: {integrity: sha512-3MEt5DTINKqfScXKfJFrRbxkrnk2AxPWGBL/ycjz4dK8iqiSJ06UxD8jh8xuh6p10TX4t2+7FsBYVxxQbMg+qA==}
     dev: true
 
   /js-stringify/1.0.2:

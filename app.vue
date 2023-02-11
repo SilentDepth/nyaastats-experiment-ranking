@@ -2,13 +2,27 @@
 useDark()
 const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
+let urlConfig = $(useUrlConfig())
+
 const rankingStore = useRanking()
 const { querying, data, total, submit } = $(rankingStore)
 let { server, query } = $(rankingStore)
+if (urlConfig.query) {
+  query = urlConfig.query
+  submit()
+}
 
 const hotkey = navigator.platform.startsWith('Mac') ? '⌘⏎' : 'Ctrl-Enter'
 
-let title = $ref('玩家数据榜单')
+const DEFAULT_TITLE = '玩家数据榜单'
+let title = $ref(urlConfig.title || DEFAULT_TITLE)
+
+watch([$$(query), $$(title)], () => {
+  urlConfig = {
+    title: title === DEFAULT_TITLE ? undefined : title,
+    query,
+  }
+})
 
 const { data: advices, pending: loadingAdvices } = useAdvices()
 
