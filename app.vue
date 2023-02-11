@@ -3,7 +3,7 @@ useDark()
 const isLargeScreen = useMediaQuery('(min-width: 768px)')
 
 const rankingStore = useRanking()
-const { querying, data, submit } = $(rankingStore)
+const { querying, data, total, submit } = $(rankingStore)
 let { server, query } = $(rankingStore)
 
 const hotkey = navigator.platform.startsWith('Mac') ? '⌘⏎' : 'Ctrl-Enter'
@@ -74,7 +74,7 @@ div(class="min-h-screen bg-stone-200 dark:bg-black dark:text-stone-200 flex flex
             span(class="inline-block w-[0.8em] h-[0.8em] bg-current animate-spin")
           template(v-else)
             | {{ `查询 (${hotkey})` }}
-      TheList(:data="data")
+      TheList(:data="data" :total="total")
   footer(class="p-3")
     a(href="https://github.com/SilentDepth/nyaastats-experiment-ranking" target="_blank")
       svg(viewBox="0 0 24 24" class="w-6 h-6 fill-stone-600 dark:fill-neutral-400 hover:fill-stone-800 dark:hover:fill-neutral-300")

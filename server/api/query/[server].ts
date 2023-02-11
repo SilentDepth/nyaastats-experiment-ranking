@@ -51,9 +51,16 @@ export default defineEventHandler(async event => {
     })
     .where(it => it.value > 0)
     .sort((a, b) => b.value - a.value)
+  const total = data
+    .branch()
+    .mapReduce(
+      it => it.value,
+      data => data.reduce((total, it) => total + it),
+    )
+  const list = data
     .limit(20)
     .data()
 
   setResponseHeader(event, 'X-Server-Timing', `-;dur=${Date.now() - _start}`)
-  return data
+  return { list, total }
 })

@@ -2,7 +2,8 @@ const HOST = location.host
 
 let server = $ref(HOST.endsWith('.nyaa.cat') ? 'nyaa' : 'kedama')
 let query = $ref('')
-let data = $ref<any[] | null>(null)
+let list = $ref<any[] | null>(null)
+let total = $ref<number>()
 let querying = $ref(false)
 
 async function submit (queryInit?: string) {
@@ -11,8 +12,9 @@ async function submit (queryInit?: string) {
   }
 
   querying = true
-  data = null
-  data = await $fetch(`/api/query/${server}`, { method: 'POST', body: query }).catch(() => {})
+  list = null
+  total = 0
+  ;({ list, total } = await $fetch(`/api/query/${server}`, { method: 'POST', body: query }).catch(() => ({} as any)))
   querying = false
 }
 
@@ -21,7 +23,8 @@ export default function useRanking () {
     server: $$(server),
     query: $$(query),
     querying: $$(querying),
-    data: $$(data),
+    data: $$(list),
+    total: $$(total),
     submit,
   }
 }
