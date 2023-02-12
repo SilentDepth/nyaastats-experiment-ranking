@@ -16,7 +16,7 @@ function agent (obj: object, prefix: string) {
         }
       } else if (typeof prop === 'string') {
         const value = obj[prefix + prop]
-        return typeof value === 'object' ? agent(value, prefix) : fixOverflow(value)
+        return typeof value === 'object' ? agent(value, prefix) : fixOverflow(value || 0)
       } else {
         return obj[prop]
       }
