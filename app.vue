@@ -38,7 +38,7 @@ function applyAdvice (advice: Advice) {
 
 <template lang="pug">
 div(class="min-h-screen bg-stone-200 dark:bg-black dark:text-stone-200 flex flex-col items-center")
-  main(class="my-10 w-screen md:w-auto max-w-[400px] md:max-w-unset p-3 md:flex md:flex-row")
+  main(class="my-10 w-screen md:w-auto max-w-[400px] md:max-w-unset p-3 md:flex md:flex-row md:items-start")
     section(class="md:flex-1 md:max-w-[300px] mb-5 md:mb-0 md:mr-5")
       details(:open="isLargeScreen" class="space-y-3")
         summary(class="list-none flex")

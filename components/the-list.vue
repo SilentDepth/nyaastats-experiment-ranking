@@ -12,8 +12,13 @@ defineProps({
   },
 })
 
-function formatNumber (num: number): string {
-  return String(Math.round(num)).replaceAll(/(\d)(?=(?:\d{3})+(\.|$))/g, '$1,')
+function formatNumber (num: number | 'Infinity'): string {
+  switch (num) {
+    case 'Infinity':
+      return '♾️'
+    default:
+      return String(Math.round(num)).replaceAll(/(\d)(?=(?:\d{3})+(\.|$))/g, '$1,')
+  }
 }
 
 let $list = $ref<HTMLOListElement>()

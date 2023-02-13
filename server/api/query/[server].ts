@@ -62,5 +62,13 @@ export default defineEventHandler(async event => {
     .data()
 
   setResponseHeader(event, 'X-Server-Timing', `-;dur=${Date.now() - _start}`)
-  return { list, total }
+  return {
+    total,
+    list: list.map(it => {
+      if (it.value === Infinity) {
+        it.value = 'Infinity' as any
+      }
+      return it
+    }),
+  }
 })
