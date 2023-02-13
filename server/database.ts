@@ -9,13 +9,23 @@ import config from './config'
 
 const { servers } = config
 
-const databases = {}
+const databases: Record<string, Database> = {}
 
 for (const [server, dir] of Object.entries<string>(servers)) {
   databases[server] = initDatabase(server, dir)
 }
 
-function initDatabase (name: string, dir: string): { db: Loki, ready: Promise<void> } {
+interface StatsRecord {
+  uuid: string
+  stats: MCStats['stats']
+}
+
+interface Database {
+  db: Loki
+  ready: Promise<void>
+}
+
+function initDatabase (name: string, dir: string): Database {
   const _start = Date.now()
 
   const db = new Loki(name)
@@ -87,7 +97,7 @@ function initDatabase (name: string, dir: string): { db: Loki, ready: Promise<vo
 
     // stats
 
-    const stats = db.addCollection<any>('stats', { indices: ['uuid'] })
+    const stats = db.addCollection<StatsRecord>('stats', { indices: ['uuid'] })
     const addStats = (file: string) => {
       const uuid = path.basename(file, '.json')
       const data = JSON.parse(fs.readFileSync(file, 'utf-8'))
@@ -131,7 +141,7 @@ async function readNBT (file: string) {
 }
 
 export default function useDatabase (): void
-export default function useDatabase (server: string): ReturnType<typeof initDatabase>
+export default function useDatabase (server: string): Database
 export default function useDatabase (server?: string): any {
   if (server) {
     return databases[server]

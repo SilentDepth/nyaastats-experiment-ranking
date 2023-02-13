@@ -11,7 +11,7 @@ export default class Parser {
     this.ast = acorn.parseExpressionAt(this.input, 0, { ecmaVersion: 3 })
   }
 
-  evaluate (context: any, node: any = this.ast) {
+  evaluate (context: any, node: any = this.ast): any {
     try {
       switch (node.type) {
         case 'Literal':
@@ -24,7 +24,7 @@ export default class Parser {
           }
           return this.evaluate(this.evaluate(context, node.object), node.property)
         case 'CallExpression':
-          return this.evaluate(context, node.callee)?.(...node.arguments.map(node => this.evaluate(context, node)))
+          return this.evaluate(context, node.callee)?.(...node.arguments.map((node: any) => this.evaluate(context, node)))
         case 'BinaryExpression':
           switch (node.operator) {
             case '+':
